@@ -1,8 +1,9 @@
-# Making a simple flappy bird game with Pygame Zero
-# flappyBirdV2.1G
-# took away scoring, and game over. code quits. Took away pipe groups
+# Beginners Flpayy Bird
+# Stops Code when they die
+# All initial x,y values are numbers instead of maths
+# No grouping for pipes
 
-# initialise Pygame Zero
+# initialise Pygame Zero, sys
 import pgzrun
 import sys
 
@@ -13,35 +14,37 @@ gap = 200
 scrollSpeed = -1
 
 
-    
 # make bird
 bird = Actor("bird")
 bird.x = 160
 bird.y = 300
 
-# make pipes
+# make pipe1
 topPipe1 = Actor("top")
 topPipe1.x = 280
 topPipe1.y = 0
 
+# make pipe2
 bottomPipe1 = Actor("bottom")
 bottomPipe1.x = 280
 bottomPipe1.y = 800
 
-
+# make pipe3
 topPipe2 = Actor("top")
 topPipe2.x = 545
 topPipe2.y = -200
 
+# make pipe4
 bottomPipe2 = Actor("bottom")
 bottomPipe2.x = 545
 bottomPipe2.y = 560
 
-
+# make pipe5
 topPipe3 = Actor("top")
 topPipe3.x = 810
 topPipe3.y = -120
 
+# make pipe6
 bottomPipe3 = Actor("bottom")
 bottomPipe3.x = 810
 bottomPipe3.y = 710
@@ -50,6 +53,7 @@ bottomPipe3.y = 710
 def draw():
     # set background image
     screen.blit("bg",(0,0))
+    # draw all actors
     bird.draw()
     topPipe1.draw()
     bottomPipe1.draw()
@@ -95,25 +99,30 @@ def update():
 
     # bird hits bottom of screen
     if bird.y > HEIGHT:
-        # reset
         print("Game Over!")
         sys.exit()
-    elif bird.colliderect(topPipe1):
+    
+    if bird.colliderect(topPipe1):
         print("Game Over!")
         sys.exit()
-    elif bird.colliderect(bottomPipe1):
+    
+    if bird.colliderect(bottomPipe1):
         print("Game Over!")
         sys.exit()
-    elif bird.colliderect(topPipe2):
+    
+    if bird.colliderect(topPipe2):
         print("Game Over!")
         sys.exit()
-    elif bird.colliderect(bottomPipe2):
+    
+    if bird.colliderect(bottomPipe2):
         print("Game Over!")
         sys.exit()
-    elif bird.colliderect(topPipe3):
+    
+    if bird.colliderect(topPipe3):
         print("Game Over!")
         sys.exit()
-    elif bird.colliderect(bottomPipe3):
+    
+    if bird.colliderect(bottomPipe3):
         print("Game Over!")
         sys.exit()
 
