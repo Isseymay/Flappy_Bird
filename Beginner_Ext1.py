@@ -1,8 +1,9 @@
-# Making a simple flappy bird game with Pygame Zero
-# flappyBirdV2.1G
-# took away scoring, and game over. code quits. Took away pipe groups
+# Beginners Flpayy Bird first extension
+# Restarts when they die
+# All initial x,y values are numbers instead of maths
+# No grouping for pipes
 
-# initialise Pygame Zero
+# initialise Pygame Zero, sys
 import pgzrun
 import sys
 
@@ -95,31 +96,30 @@ def update():
 
     # bird hits bottom of screen
     if bird.y > HEIGHT:
-        # reset
         print("Reset!")
         reset()
-    elif bird.colliderect(topPipe1):
-        # reset
+    
+    if bird.colliderect(topPipe1):
         print("Reset!")
         reset()
-    elif bird.colliderect(bottomPipe1):
-        # reset
+    
+    if bird.colliderect(bottomPipe1):
         print("Reset!")
         reset()
-    elif bird.colliderect(topPipe2):
-        # reset
+    
+    if bird.colliderect(topPipe2):
         print("Reset!")
         reset()
-    elif bird.colliderect(bottomPipe2):
-        # reset
+    
+    if bird.colliderect(bottomPipe2):
         print("Reset!")
         reset()
-    elif bird.colliderect(topPipe3):
-        # reset
+    
+    if bird.colliderect(topPipe3):
         print("Reset!")
         reset()
-    elif bird.colliderect(bottomPipe3):
-        # reset
+    
+    if bird.colliderect(bottomPipe3):
         print("Reset!")
         reset()
 
@@ -127,8 +127,8 @@ def update():
 def on_mouse_down():
     bird.y = bird.y - 50
 
+# reset
 def reset():
-    # reset
     bird.x = 160
     bird.y = 300
     topPipe1.x = 280
