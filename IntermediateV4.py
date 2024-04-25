@@ -6,6 +6,7 @@ from random import *
 WIDTH = 800
 HEIGHT = 600
 score = 0
+gameOver = False
 gap = 210
     
 # make bird
@@ -46,16 +47,21 @@ bottomPipe3.y = y3 + 300 + (gap//2)
 pipes.append(bottomPipe3)
 
 def draw():
-    global score
-    screen.blit("bg",(0,0))
-    bird.draw()
+    global score, gameOver
+    if gameOver:
+        screen.clear()
+        screen.fill((0,0,0))
+        screen.draw.text(f"Game Over\nYour score was {score}",center=(WIDTH*0.5,HEIGHT*0.5),align="left",color=(255,255,255), fontsize = 60)
+    else:
+        screen.blit("bg",(0,0))
+        bird.draw()
 
-    for pipe in pipes:
-        pipe.draw()
-    screen.draw.text(f"Score: {score}",topleft=(10,10),color=(0,0,0), fontsize = 30)
+        for pipe in pipes:
+            pipe.draw()
+        screen.draw.text(f"Score: {score}",topleft=(10,10),color=(0,0,0), fontsize = 30)
        
 def update():
-    global score
+    global score, gameOver
     bird.y = bird.y + 1
 
     for i in range((len(pipes)//2)):
@@ -66,20 +72,19 @@ def update():
         if pipes[top].x < - 44:
             pipes[top].x = WIDTH
             pipes[bottom].x = WIDTH
-            score = score + 1
             tempy = randint(155,445)
             pipes[top].y = tempy - (300 + (gap//2))
             pipes[bottom].y = tempy + 300 + (gap//2)
+            if not gameOver:
+                score = score + 1
 
 
     if bird.y > HEIGHT:
-        print(score)
-        sys.exit()
+        gameOver=True
         
     for pipe in pipes:
         if bird.colliderect(pipe):
-            print(score)
-            sys.exit()
+            gameOver=True
 
 def on_mouse_down():
     bird.y = bird.y - 50
