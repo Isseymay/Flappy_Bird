@@ -11,8 +11,11 @@ import sys
 WIDTH = 800
 HEIGHT = 600
 gap = 200
-scrollSpeed = -1
+score = 0
 
+# make background 
+background = Actor("bg")
+background.top_left = (0,0)
 
 # make bird
 bird = Actor("bird")
@@ -51,8 +54,8 @@ bottomPipe3.y = 710
 
 # draw everything to screen
 def draw():
-    # set background image
-    screen.blit("bg",(0,0))
+    # draw background
+    background.draw()
     # draw all actors
     bird.draw()
     topPipe1.draw()
@@ -64,37 +67,41 @@ def draw():
 
 # updates everything
 def update():
+    global score
     # updating bird
     bird.y = bird.y + 1
 
     # updating 1st pipe 
-    topPipe1.x = topPipe1.x + scrollSpeed
-    if topPipe1.x < -87:
+    topPipe1.x = topPipe1.x - 1
+    if topPipe1.x < -44:
         topPipe1.x = WIDTH
+        score = score + 1
         
     # updating 2nd pipe 
-    bottomPipe1.x = bottomPipe1.x + scrollSpeed
-    if bottomPipe1.x < -87:
+    bottomPipe1.x = bottomPipe1.x - 1
+    if bottomPipe1.x < -44:
         bottomPipe1.x = WIDTH
 
     # updating 3rd pipe 
-    topPipe2.x = topPipe2.x + scrollSpeed
-    if topPipe2.x < -87:
+    topPipe2.x = topPipe2.x - 1
+    if topPipe2.x < -44:
         topPipe2.x = WIDTH
+        score = score + 1
         
     # updating 4th pipe 
-    bottomPipe2.x = bottomPipe2.x + scrollSpeed
-    if bottomPipe2.x < -87:
+    bottomPipe2.x = bottomPipe2.x - 1
+    if bottomPipe2.x < -44:
         bottomPipe2.x = WIDTH
 
     # updating 5th pipe 
-    topPipe3.x = topPipe3.x + scrollSpeed
-    if topPipe3.x < -87:
+    topPipe3.x = topPipe3.x - 1
+    if topPipe3.x < -44:
         topPipe3.x = WIDTH
+        score = score + 1
         
     # updating 6th pipe 
-    bottomPipe3.x = bottomPipe3.x + scrollSpeed
-    if bottomPipe3.x < -87:
+    bottomPipe3.x = bottomPipe3.x - 1
+    if bottomPipe3.x < -44:
         bottomPipe3.x = WIDTH
 
     # bird hits bottom of screen
