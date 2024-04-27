@@ -1,11 +1,3 @@
-# Making a simple flappy bird game with Pygame Zero
-# flappyBirdV2.1G
-# making a pipe class
-# timer score instead
-# methods for repeated code
-# write to file for highscore 
-# projictile falling
-
 # initialise Pygame Zero
 import pgzrun
 import sys
