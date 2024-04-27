@@ -1,113 +1,111 @@
-# Making a simple flappy bird game with Pygame Zero
-# flappyBirdV2.1G
-# storing the pipes to change easier
-# added a game over and scoring
-# added random
-
-# initialise Pygame Zero
+# start modules
 import pgzrun
+import sys
 from random import *
 
-# initialize constants
+# create constants
 WIDTH = 800
 HEIGHT = 600
-scrollSpeed = -1
-gameOver = False
+gap = 210
 score = 0
+gameOver = False
 
-    
+# print welcome
+print(f"The game is about to start!\nClick the mouse to 'flap' upwards\nDodge the pipes and the floor\nGood luck and have fun!")
+
+# make background
+background = Actor("bg")
+background.top_left = (0,0)
+
 # make bird
 bird = Actor("bird")
-bird.x = WIDTH*0.15
-bird.y = HEIGHT*0.5
-minGap = int((bird.height*1.5)+50)
-# is this too small?
-maxGap = int((bird.height*3.5)+50)
+bird.x = 160
+bird.y = 300
 
 # make pipes
-# pipe group 1
+pipes=[]
+
+y1 = randint(155,445)
 topPipe1 = Actor("top")
-topPipe1.x = int(WIDTH*0.4)
-topPipe1.y = randint(int(-(topPipe1.height*0.3)),int(topPipe1.height*0.05))
+topPipe1.x = 280
+topPipe1.y = y1 - (300+(gap//2))
+pipes.append(topPipe1)
 bottomPipe1 = Actor("bottom")
-bottomPipe1.x = int(WIDTH*0.4)
-bottomPipe1.y = (topPipe1.height+topPipe1.y) + randint(minGap,maxGap)
-pipes1 = (topPipe1,bottomPipe1)
+bottomPipe1.x = 280
+bottomPipe1.y = y1 + 300 + (gap//2)
+pipes.append(bottomPipe1)
 
-# pipe group 2
+y2 = randint(155,445)
 topPipe2 = Actor("top")
-topPipe2.x = int(WIDTH*0.75)
-topPipe2.y = randint(int(-(topPipe2.height*0.3)),int(topPipe2.height*0.05))
+topPipe2.x = 545
+topPipe2.y = y2 - (300+(gap//2))
+pipes.append(topPipe2)
 bottomPipe2 = Actor("bottom")
-bottomPipe2.x = int(WIDTH*0.75)
-bottomPipe2.y = (topPipe2.height+topPipe2.y) + randint(minGap,maxGap)
-pipes2 = (topPipe2,bottomPipe2)
+bottomPipe2.x = 545
+bottomPipe2.y = y2 + 300 + (gap//2)
+pipes.append(bottomPipe2)
 
-# pipe group 3
+y3 = randint(155,445)
 topPipe3 = Actor("top")
-topPipe3.x = int(WIDTH*1.1)
-topPipe3.y = randint(int(-(topPipe3.height*0.3)),int(topPipe3.height*0.05))
+topPipe3.x = 810
+topPipe3.y = y3 - (300+(gap//2))
+pipes.append(topPipe3)
 bottomPipe3 = Actor("bottom")
-bottomPipe3.x = int(WIDTH*1.1)
-bottomPipe3.y = (topPipe3.height+topPipe3.y) + randint(minGap,maxGap)
-pipes3 = (topPipe3,bottomPipe3)
-
-# pipe group 4
-
-
-pipeList=[pipes1,pipes2,pipes3]
+bottomPipe3.x = 810
+bottomPipe3.y = y3 + 300 + (gap//2)
+pipes.append(bottomPipe3)
 
 # draw everything to screen
 def draw():
+    global score, gameOver
     if gameOver:
         screen.clear()
         screen.fill((0,0,0))
         screen.draw.text(f"Game Over\nYour score was {score}",center=(WIDTH*0.5,HEIGHT*0.5),align="left",color=(255,255,255), fontsize = 60)
     else:
-        # set background image
-        screen.blit("bg",(0,0))
+        # draw background
+        background.draw()
+        
+        # draw actors
         bird.draw()
 
-        for pipes in pipeList:
-            pipes[0].draw()
-            pipes[1].draw()
+        for pipe in pipes:
+            pipe.draw()
         screen.draw.text(f"Score: {score}",topleft=(10,10),color=(0,0,0), fontsize = 30)
-
-
-# updates everything
+       
+# update everything
 def update():
-    global score,gameOver
-    # updating bird
+    global score, gameOver
+    # update bird
     bird.y = bird.y + 1
 
-    # updating pipes
-    for n,pipes in enumerate(pipeList):
-        top = pipes[0]
-        bottom = pipes[1]
-        top.x = top.x + scrollSpeed
-        bottom.x = bottom.x + scrollSpeed
-        if top.x < (0-(top.width*0.5)):
-            top.x = WIDTH
-            bottom.x = WIDTH
-            top.y = randint(int(-(top.height*0.3)),int(top.height*0.05))
-            bottom.y = (top.height+top.y) + randint(minGap,maxGap)
+    # update pipes
+    for i in range((len(pipes)//2)):
+        top = 2*i
+        bottom = (2*i)+1
+        pipes[top].x = pipes[top].x -1
+        pipes[bottom].x = pipes[bottom].x -1
+        if pipes[top].x < - 44:
+            pipes[top].x = WIDTH
+            pipes[bottom].x = WIDTH
+            tempy = randint(155,445)
+            pipes[top].y = tempy - (300 + (gap//2))
+            pipes[bottom].y = tempy + 300 + (gap//2)
             if not gameOver:
                 score = score + 1
-        pipeList[n] = (top,bottom)
-    
 
     # bird hits bottom of screen
     if bird.y > HEIGHT:
-        # reset
-        gameOver = True
+        gameOver=True
+        
+    # bird hits pipes
+    for pipe in pipes:
+        if bird.colliderect(pipe):
+            gameOver=True
 
-    for pipes in pipeList:
-        if bird.colliderect(pipes[0]) or bird.colliderect(pipes[1]):
-            gameOver = True
-    
 # moving
-def on_mouse_down():
+def on_mouse_down(pos):
     bird.y = bird.y - 50
-
-# runs everything
-pgzrun.go() 
+    
+# makes everything run
+pgzrun.go()
