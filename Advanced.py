@@ -1,21 +1,20 @@
-# Making a simple flappy bird game with Pygame Zero
-# flappyBirdV2.1G
-# making a pipe class
-# timer score instead
-# methods for repeated code
-# write to file for highscore 
-# projictile falling
-
-# initialise Pygame Zero
+# start modules
 import pgzrun
 import sys
 from random import *
 
-# initialize constants
+# create constants
 WIDTH = 800
 HEIGHT = 600
 gameOver = False
 score = 0
+
+# print welcome
+print(f"The game is about to start!\nClick the mouse to 'flap' upwards\nDodge the pipes and the floor\nGood luck and have fun!")
+
+# make background
+background = Actor("bg")
+background.top_left = (0,0)
 
 # make bird
 bird = Actor("bird")
@@ -70,7 +69,9 @@ def draw():
         screen.draw.text(f"Game Over\nYour score was: {score}",center=(400,300),align="left",color=(255,255,255), fontsize = 60,width=WIDTH*0.8)
     else:
         # set background image
-        screen.blit("bg",(0,0))
+        background.draw()
+        
+        # draw characters
         bird.draw()
 
         for pipes in pipeList:
