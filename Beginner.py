@@ -3,15 +3,18 @@
 # All initial x,y values are numbers instead of maths
 # No grouping for pipes
 
-# initialise Pygame Zero, sys
+# start modules
 import pgzrun
 import sys
 
-# initialize constants
+# create constants
 WIDTH = 800
 HEIGHT = 600
 gap = 200
 score = 0
+
+# print welcome
+print(f"The game is about to start!\nClick the mouse to 'flap' upwards\nDodge the pipes and the floor\nGood luck and have fun!")
 
 # make background 
 background = Actor("bg")
@@ -22,32 +25,27 @@ bird = Actor("bird")
 bird.x = 160
 bird.y = 300
 
-# make pipe1
+# make pipes
 topPipe1 = Actor("top")
 topPipe1.x = 280
 topPipe1.y = 0
 
-# make pipe2
 bottomPipe1 = Actor("bottom")
 bottomPipe1.x = 280
 bottomPipe1.y = 800
 
-# make pipe3
 topPipe2 = Actor("top")
 topPipe2.x = 545
 topPipe2.y = -200
 
-# make pipe4
 bottomPipe2 = Actor("bottom")
 bottomPipe2.x = 545
 bottomPipe2.y = 560
 
-# make pipe5
 topPipe3 = Actor("top")
 topPipe3.x = 810
 topPipe3.y = -120
 
-# make pipe6
 bottomPipe3 = Actor("bottom")
 bottomPipe3.x = 810
 bottomPipe3.y = 710
@@ -56,7 +54,7 @@ bottomPipe3.y = 710
 def draw():
     # draw background
     background.draw()
-    # draw all actors
+    # draw all characters
     bird.draw()
     topPipe1.draw()
     bottomPipe1.draw()
@@ -71,35 +69,30 @@ def update():
     # updating bird
     bird.y = bird.y + 1
 
-    # updating 1st pipe 
+    # updating pipes 
     topPipe1.x = topPipe1.x - 1
     if topPipe1.x < -44:
         topPipe1.x = WIDTH
         score = score + 1
-        
-    # updating 2nd pipe 
+         
     bottomPipe1.x = bottomPipe1.x - 1
     if bottomPipe1.x < -44:
         bottomPipe1.x = WIDTH
-
-    # updating 3rd pipe 
+ 
     topPipe2.x = topPipe2.x - 1
     if topPipe2.x < -44:
         topPipe2.x = WIDTH
         score = score + 1
         
-    # updating 4th pipe 
     bottomPipe2.x = bottomPipe2.x - 1
     if bottomPipe2.x < -44:
         bottomPipe2.x = WIDTH
 
-    # updating 5th pipe 
     topPipe3.x = topPipe3.x - 1
     if topPipe3.x < -44:
         topPipe3.x = WIDTH
         score = score + 1
         
-    # updating 6th pipe 
     bottomPipe3.x = bottomPipe3.x - 1
     if bottomPipe3.x < -44:
         bottomPipe3.x = WIDTH
@@ -109,6 +102,7 @@ def update():
         print("Game Over!")
         sys.exit()
     
+    # bird hits pipes
     if bird.colliderect(topPipe1):
         print("Game Over!")
         sys.exit()
