@@ -1,3 +1,11 @@
+# Making a simple flappy bird game with Pygame Zero
+# flappyBirdV2.1G
+# making a pipe class
+# timer score instead
+# methods for repeated code
+# write to file for highscore 
+# projictile falling
+
 # initialise Pygame Zero
 import pgzrun
 import sys
@@ -11,14 +19,14 @@ score = 0
 
 # make bird
 bird = Actor("bird")
-bird.x = WIDTH*0.15
-bird.y = HEIGHT*0.5
+bird.x = 160
+bird.y = 300
 
 # make pipes
 class pipes():
     def __init__(self,x):
         gap = randint(160,260)
-        genY = randint(50+(gap//2),250-(gap//2))
+        genY = randint((50+(gap//2)),(550-(gap//2)))
         self.top = Actor("top")
         self.top.x = x
         self.top.y = genY - (300+(gap//2))
@@ -35,8 +43,8 @@ class pipes():
         if self.top.x < (0-(self.top.width//2)):
             self.top.x = WIDTH
             self.bottom.x = WIDTH
-            gap = randint(160,260)
-            genY = randint(50+(gap//2),250-(gap//2))
+            gap = randint(155,445)
+            genY = randint((50+(gap//2)),(550-(gap//2)))
             self.top.y = genY - (300+(gap//2))
             self.bottom.y = genY + 300+(gap//2)
             if not gameOver:
@@ -47,20 +55,19 @@ class pipes():
         self.top.draw()
         self.bottom.draw()
 
-pipes1 = pipes(WIDTH*0.4)
-pipes2 = pipes(WIDTH*0.75)
-pipes3 = pipes(WIDTH*1.1)
+pipes1 = pipes(266)
+pipes2 = pipes(545)
+pipes3 = pipes(810)
 pipeList=[pipes1,pipes2,pipes3]
 
 # draw everything to screen
 def draw():
-    global entered,gameOver
+    global score,gameOver
     
     if gameOver:
         screen.clear()
         screen.fill((0,0,0))
-        outdraw = scoring()
-        screen.draw.text(f"Game Over\n{outdraw}",center=(WIDTH*0.5,HEIGHT*0.5),align="left",color=(255,255,255), fontsize = 60,width=WIDTH*0.8)
+        screen.draw.text(f"Game Over\nYour score was: {score}",center=(400,300),align="left",color=(255,255,255), fontsize = 60,width=WIDTH*0.8)
     else:
         # set background image
         screen.blit("bg",(0,0))
@@ -75,7 +82,7 @@ def draw():
 def update():
     global score,gameOver
     
-    bird.y = bird.y - 1
+    bird.y = bird.y + 1
 
     # updating pipes
     for pipes in pipeList:
