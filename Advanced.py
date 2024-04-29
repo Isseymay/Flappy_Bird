@@ -1,4 +1,4 @@
-# Base advanced (accurate to workbook)
+# Base advanced
 
 # start modules
 import pgzrun
