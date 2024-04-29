@@ -147,7 +147,7 @@ def scoring():
     scores={}
     won = False
     highscore = 0
-    with open(".\GPN\Flappy_Bird\Highscore_3.txt","r") as file:
+    with open("Highscore.txt","r") as file:
         nextLine = file.readline()
         while nextLine:
             if nextLine != "":
@@ -155,7 +155,7 @@ def scoring():
                 hsName,hscore = nextLine.split(": ")
                 scores[hsName] = hscore
             nextLine = file.readline()
-    with open(".\GPN\Flappy_Bird\Highscore_3.txt","w") as f:
+    with open("Highscore.txt","w") as f:
         if name in scores:
             if score > int(scores[name]):
                 won = True
