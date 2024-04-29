@@ -1,7 +1,4 @@
-# Beginners Flpayy Bird
-# Stops Code when they die
-# All initial x,y values are numbers instead of maths
-# No grouping for pipes
+# Baseline Beginners
 
 # start modules
 import pgzrun
@@ -10,15 +7,18 @@ import sys
 # create constants
 WIDTH = 800
 HEIGHT = 600
-gap = 200
 score = 0
 
 # print welcome
-print(f"The game is about to start!\nClick the mouse to 'flap' upwards\nDodge the pipes and the floor\nGood luck and have fun!")
+print("The game is about to start!")
+print('Click the mouse to "flap" upwards')
+print("Dodge the pipes and the floor")
+print("Good luck and have fun!")
 
 # make background 
 background = Actor("bg")
-background.top_left = (0,0)
+background.x = 400
+background.y = 300
 
 # make bird
 bird = Actor("bird")
@@ -27,27 +27,27 @@ bird.y = 300
 
 # make pipes
 topPipe1 = Actor("top")
-topPipe1.x = 280
-topPipe1.y = 0
+topPipe1.x = 266
+topPipe1.y = -10
 
 bottomPipe1 = Actor("bottom")
-bottomPipe1.x = 280
+bottomPipe1.x = 266
 bottomPipe1.y = 800
 
 topPipe2 = Actor("top")
-topPipe2.x = 545
+topPipe2.x = 532
 topPipe2.y = -200
 
 bottomPipe2 = Actor("bottom")
-bottomPipe2.x = 545
+bottomPipe2.x = 532
 bottomPipe2.y = 560
 
 topPipe3 = Actor("top")
-topPipe3.x = 810
+topPipe3.x = 798
 topPipe3.y = -120
 
 bottomPipe3 = Actor("bottom")
-bottomPipe3.x = 810
+bottomPipe3.x = 798
 bottomPipe3.y = 710
 
 # draw everything to screen
@@ -74,11 +74,11 @@ def update():
     if topPipe1.x < -44:
         topPipe1.x = WIDTH
         score = score + 1
-         
+        
     bottomPipe1.x = bottomPipe1.x - 1
     if bottomPipe1.x < -44:
         bottomPipe1.x = WIDTH
- 
+
     topPipe2.x = topPipe2.x - 1
     if topPipe2.x < -44:
         topPipe2.x = WIDTH
@@ -100,31 +100,38 @@ def update():
     # bird hits bottom of screen
     if bird.y > HEIGHT:
         print("Game Over!")
+        print("Your score was:",str(score))
         sys.exit()
     
     # bird hits pipes
     if bird.colliderect(topPipe1):
         print("Game Over!")
+        print("Your score was:",str(score))
         sys.exit()
     
     if bird.colliderect(bottomPipe1):
         print("Game Over!")
+        print("Your score was:",str(score))
         sys.exit()
     
     if bird.colliderect(topPipe2):
         print("Game Over!")
+        print("Your score was:",str(score))
         sys.exit()
     
     if bird.colliderect(bottomPipe2):
         print("Game Over!")
+        print("Your score was:",str(score))
         sys.exit()
     
     if bird.colliderect(topPipe3):
         print("Game Over!")
+        print("Your score was:",str(score))
         sys.exit()
     
     if bird.colliderect(bottomPipe3):
         print("Game Over!")
+        print("Your score was:",str(score))
         sys.exit()
 
 # moving
