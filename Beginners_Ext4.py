@@ -1,4 +1,4 @@
-# Base beginners + Game over extension + Extra pipes extension
+# Base beginners + Game Over extension + Extra pipes extension
 
 # start modules
 import pgzrun
