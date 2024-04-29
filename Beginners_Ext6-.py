@@ -148,12 +148,12 @@ def on_mouse_down():
 def scoring():
     global score, outText
     highscore = 0
-    with open(".\GPN\Flappy_Bird\Highscore.txt","r") as f:
+    with open("Highscore.txt","r") as f:
         line = f.readline()
         line = line.strip("\n")
         if line !="":
             highscore = int(line)
-    with open(".\GPN\Flappy_Bird\Highscore.txt","w") as file:
+    with open("Highscore.txt","w") as file:
         if score > highscore:
             outText = f"Congratulations you beat the high score!\nYour score was: {score}"
             file.write(f"{score}\n")
