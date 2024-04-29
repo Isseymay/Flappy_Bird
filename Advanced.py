@@ -1,4 +1,6 @@
-# <The student's name>
+# Base advanced (accurate to workbook)
+
+# start modules
 import pgzrun
 import sys
 from random import *
@@ -55,7 +57,6 @@ class Pipes():
             y = randint((300-250+(gap//2)),(850-300-(gap//2)))
             self.top.y = y - (300 + (gap//2))
             self.bottom.y = y + 300 + (gap//2)
-            score = score + 1
 
         if bird.colliderect(self.top) or bird.colliderect(self.bottom):
             print("Game Over!")
