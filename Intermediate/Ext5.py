@@ -1,4 +1,4 @@
-# Base intermediate (accurate to booklet)
+# Base intermediate + Highscore extension (both parts)
 
 # start modules
 import pgzrun
